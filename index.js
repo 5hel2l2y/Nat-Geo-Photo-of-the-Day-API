@@ -38,16 +38,29 @@ var photo = function () {
             self.enableCors();
         }
 
+        var photoContentJSONAccess;
+
         app.get('/api/dailyphoto', function(req, res){
             request(self.url, function(err, response, html){
                 if (err) res.jsonp(err);
                 var $ = cheerio.load(html);
 
-                res.jsonp({ 
-                    src:    $("div.primary_photo img").attr("src"),
-                    alt:    $("div.primary_photo img").attr("alt"),
-                    description: $("div#caption p:nth-child(4)").text(),
-                    credit: $("div#caption p.credit").text()
+                // load image json source
+                photoContentJSONAccess = $('div.infinite.section>div').data('platformEndpoint');
+
+                // request json from path
+                request.get(photoContentJSONAccess, function(err, response, html){
+                    if (err) res.jsonp(err);
+
+                    var imageInfo = JSON.parse(response.body).items[0];
+                    var imageSrc = imageInfo.url + imageInfo.originalUrl;
+
+                    res.jsonp({ 
+                        src:    imageSrc,
+                        alt:    imageInfo.title,
+                        description: imageInfo.altText,
+                        credit: imageInfo.credit
+                    });
                 });
             });
         });
