@@ -53,8 +53,11 @@ var photo = function () {
                     if (err) res.jsonp(err);
 
                     var imageInfo = JSON.parse(response.body).items[0];
-                    console.log(imageInfo);
-                    var imageSrc = imageInfo.url;
+                    if(imageInfo.originalUrl != undefined)
+                        var originalUrl = imageInfo.originalUrl;
+                    else
+                        var originalUrl = "";
+                    var imageSrc = imageInfo.url + originalUrl;
 
                     res.jsonp({ 
                         src:    imageSrc,
