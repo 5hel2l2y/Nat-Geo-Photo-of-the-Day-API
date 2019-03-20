@@ -3,6 +3,8 @@ var express = require('express'),
     cheerio = require('cheerio'),
     app     = express();
 
+const natgeo = require('national-geographic-api').NationalGeographicAPI;
+
 
 /**
  * Photo Module
@@ -10,7 +12,6 @@ var express = require('express'),
 var photo = function () {
     var self = this;
 
-    self.url  = "http://photography.nationalgeographic.com/photography/photo-of-the-day/";
     self.port = process.env.PORT || 3000;
 
 
@@ -38,34 +39,15 @@ var photo = function () {
             self.enableCors();
         }
 
-        var photoContentJSONAccess;
+        app.get('/api/dailyphoto', async(req, res, next) => {
+            const result = await natgeo.getPhotoOfDay();
 
-        app.get('/api/dailyphoto', function(req, res){
-            request(self.url, function(err, response, html){
-                if (err) res.jsonp(err);
-                var $ = cheerio.load(html);
-
-                // load image json source
-                photoContentJSONAccess = $('div.infinite.section>div').data('platformEndpoint');
-
-                // request json from path
-                request.get(photoContentJSONAccess, function(err, response, html){
-                    if (err) res.jsonp(err);
-
-                    var imageInfo = JSON.parse(response.body).items[0];
-                    if(imageInfo.originalUrl != undefined)
-                        var originalUrl = imageInfo.originalUrl;
-                    else
-                        var originalUrl = "";
-                    var imageSrc = imageInfo.url + originalUrl;
-
-                    res.jsonp({ 
-                        src:    imageSrc,
-                        alt:    imageInfo.title,
-                        description: imageInfo.altText,
-                        credit: imageInfo.credit
-                    });
-                });
+            res.jsonp({ 
+                all:            result,
+                src:            result.data[0].attributes.image.uri,
+                alt:            result.data[0].attributes.image.title,
+                description:    result.data[0].attributes.image.alt_text,
+                credit:         result.data[0].attributes.image.credit
             });
         });
 
