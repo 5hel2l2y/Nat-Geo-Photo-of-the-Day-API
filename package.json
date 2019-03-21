@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "(unofficial) National Geographic Photo of the Day API",
   "scripts": {
-    "start": "node run.js",
+    "start": "node index.js",
     "test": null
   },
   "author": "Sterling Whitley",
