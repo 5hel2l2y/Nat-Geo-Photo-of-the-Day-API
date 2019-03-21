@@ -6,7 +6,6 @@
   "main": "app.js",
   "scripts": {
     "start": "node run.js",
-    "build": "webpack",
     "test": null
   },
   "author": "Sterling Whitley",
@@ -15,7 +14,7 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": "0.12"
+    "node": "10.x"
   },
   "dependencies": {
     "cheerio": "^0.22.0",
