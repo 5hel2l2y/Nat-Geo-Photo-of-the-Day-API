@@ -2,8 +2,6 @@
   "name": "nat-geo-api",
   "version": "1.1.0",
   "description": "(unofficial) National Geographic Photo of the Day API",
-  "homepage": "https://5hel2l2y.github.io/natgeo/",
-  "main": "app.js",
   "scripts": {
     "start": "node run.js",
     "test": null

@@ -1,10 +1,9 @@
-var express = require('express'),
-    request = require('request'),
-    cheerio = require('cheerio'),
-    app     = express();
-
+const express = require('express');
+const request = require('request');
+const cheerio = require('cheerio');
+const path = require('path');
 const natgeo = require('national-geographic-api').NationalGeographicAPI;
-
+const app = express();
 
 /**
  * Photo Module
@@ -13,7 +12,6 @@ var photo = function () {
     var self = this;
 
     self.port = process.env.PORT || 3000;
-
 
     /**
      *
@@ -39,6 +37,10 @@ var photo = function () {
             self.enableCors();
         }
 
+        app.get('/', function (req, res) {
+            res.send(JSON.stringify({ Hello: "World"}));
+        });
+
         app.get('/api/dailyphoto', async(req, res, next) => {
             const result = await natgeo.getPhotoOfDay();
 
@@ -51,7 +53,9 @@ var photo = function () {
             });
         });
 
-        app.listen(self.port);
+        app.listen(self.port, function() {
+            console.log("Example app listening on port 3000!");
+        });
     };
 
 
