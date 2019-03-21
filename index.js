@@ -1,7 +1,4 @@
 const express = require('express');
-const request = require('request');
-const cheerio = require('cheerio');
-const path = require('path');
 const natgeo = require('national-geographic-api').NationalGeographicAPI;
 const app = express();
 
