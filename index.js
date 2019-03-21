@@ -3,7 +3,7 @@ const natgeo = require('national-geographic-api').NationalGeographicAPI;
 const app = express();
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.get('/', function (req, res) {
     res.send(JSON.stringify({ Hello: "World"}));
@@ -22,5 +22,5 @@ app.get('/api/dailyphoto', async(req, res, next) => {
 });
 
 app.listen(port, function() {
-    console.log("Listening on port 3000!");
+    console.log("Listening on port 8000!");
 });
