@@ -1,6 +1,9 @@
 var express = require('express');
 var natgeo = require('national-geographic-api').NationalGeographicAPI;
 var app = express();
+var path = require('path');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
