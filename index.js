@@ -32,6 +32,6 @@ app.get('/api/dailyphoto', function(req, res) {
             credit:         result.data[0].attributes.image.credit
         });
     }, (reason) => {
-        handleError(res, "Failed to get dailyphoto.", 400);
+        handleError(res, reason, "Failed to get dailyphoto.", 400);
     });
 });
