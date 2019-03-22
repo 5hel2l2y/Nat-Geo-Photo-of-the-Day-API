@@ -1,14 +1,6 @@
 var express = require('express');
 var natgeo = require('national-geographic-api').NationalGeographicAPI;
 var app = express();
-var path = require('path');
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-});
 
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
@@ -37,4 +29,9 @@ app.get('/api/dailyphoto', function(req, res) {
     }, (reason) => {
         handleError(res, reason, "Failed to get dailyphoto.", 400);
     });
+});
+
+var server = app.listen(process.env.PORT || 8080, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
 });
