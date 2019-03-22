@@ -1,12 +1,12 @@
 {
   "name": "nat-geo-api",
   "version": "1.1.0",
-  "description": "(unofficial) National Geographic Photo of the Day API",
+  "description": "National Geographic Photo of the Day API - revamped",
   "scripts": {
     "start": "node index.js",
     "test": null
   },
-  "author": "Sterling Whitley",
+  "author": "Sherry Yang",
   "contributors": [
     "Mario Octavio Jimenez"
   ],
@@ -17,7 +17,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "national-geographic-api": "^2.0.4",
-    "package.json": "^2.0.1"
+    "package.json": "^2.0.1",
+    "request": "^2.88.0"
   },
   "keywords": [
     "national geographic",
