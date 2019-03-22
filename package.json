@@ -15,9 +15,7 @@
     "node": "10.x"
   },
   "dependencies": {
-    "express": "^4.16.4",
-    "national-geographic-api": "^2.0.4",
-    "package.json": "^2.0.1"
+    
   },
   "keywords": [
     "national geographic",
